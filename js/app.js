@@ -1,7 +1,4 @@
 $(document).ready(function(){
-	// var secretNumber = Math.floor(Math.random()*101),
-	// var difference = Math.abs(33 - secretNumber);
-	// console.log(difference);
 	
 	var newGame = function() {
 		newNumber = Math.floor(Math.random()*100);
@@ -19,7 +16,7 @@ $(document).ready(function(){
 	$('#userGuess').on('input', function (event) {
 	    this.value = this.value.replace(/[^0-9]/g, '');
 	});
-	// $('#userGuess').isNumeric();
+	
 	$('input[type="text"]').attr({ maxLength : 2 });
 
 	$('#guessButton').click(function() {
@@ -29,9 +26,6 @@ $(document).ready(function(){
 			$('#feedback').text('The Number is '+guess+' - You Win!!');
 			$('#guessButton').attr('value', 'Try New Game');
 			$('#guessButton').attr('disabled', 'disabled');
-			// $('#guessButton').click(function() {
-			// 	newGame();
-			// });
 		} else if ( difference <= 3 ) {
 			$('#feedback').text('WHITE HOT!');
 		} else if ( difference <= 5 ) {
@@ -60,21 +54,11 @@ $(document).ready(function(){
 			newNumber = Math.floor(Math.random()*100);
 			guessNum = [];
 		}
-		console.log(newNumber);
-		console.log(guessNum);
 		event.preventDefault();
 	});
 
 	$('.new').click(function() {
-		// newNumber = Math.floor(Math.random()*100);
-		// guessNum = [];
-		// $('#guessButton').attr('value', 'Guess');
-		// $('#guessList').empty();
-		// $('#count').text(0);
-		// $('#feedback').text('New Game! Make a guess..');
 		newGame();
 		$('#guessButton').removeAttr("disabled"); 
-		console.log(newNumber);
-		console.log(guessNum);
 	});
 });
