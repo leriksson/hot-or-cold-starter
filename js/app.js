@@ -4,8 +4,15 @@ $(document).ready(function(){
 	// console.log(difference);
 	
 	var newGame = function() {
-
+		newNumber = Math.floor(Math.random()*100);
+		guessNum = [];
+		$('#guessButton').attr('value', 'Guess');
+		$('#guessList').empty();
+		$('#count').text(0);
+		$('#feedback').text('New Game! Make a guess..');
+		$('#guessButton').removeAttr("disabled"); 
 	};
+
 	var newNumber = Math.floor(Math.random()*100);
 	guessNum = [];
 
@@ -16,13 +23,15 @@ $(document).ready(function(){
 	$('input[type="text"]').attr({ maxLength : 2 });
 
 	$('#guessButton').click(function() {
-		var guess = parseInt($('input[name="userGuess"]').val());
+		var guess = parseInt($('input[name="userGuess"]').val()) || 0;
 		var difference = Math.abs(guess - newNumber);
 		if ( guess === newNumber ) {
 			$('#feedback').text('The Number is '+guess+' - You Win!!');
-			$('#guessButton').attr('value', 'New Game');
-			$('#guessButton').click(function() {
-			});
+			$('#guessButton').attr('value', 'Try New Game');
+			$('#guessButton').attr('disabled', 'disabled');
+			// $('#guessButton').click(function() {
+			// 	newGame();
+			// });
 		} else if ( difference <= 3 ) {
 			$('#feedback').text('WHITE HOT!');
 		} else if ( difference <= 5 ) {
@@ -46,6 +55,8 @@ $(document).ready(function(){
 			$('#count').text(0);
 			$('#guessList').empty();
 			$('#feedback').text('You Lost. Try a New Game..');
+			$('#guessButton').attr('value', 'Try New Game');
+			$('#guessButton').attr('disabled', 'disabled');
 			newNumber = Math.floor(Math.random()*100);
 			guessNum = [];
 		}
@@ -55,12 +66,14 @@ $(document).ready(function(){
 	});
 
 	$('.new').click(function() {
-		newNumber = Math.floor(Math.random()*100);
-		guessNum = [];
-		$('#guessList').empty();
-		$('#count').text(0);
-		$('#feedback').text('New Game! Make a guess..');
-		// $('#guessButton').removeAttr("disabled"); 
+		// newNumber = Math.floor(Math.random()*100);
+		// guessNum = [];
+		// $('#guessButton').attr('value', 'Guess');
+		// $('#guessList').empty();
+		// $('#count').text(0);
+		// $('#feedback').text('New Game! Make a guess..');
+		newGame();
+		$('#guessButton').removeAttr("disabled"); 
 		console.log(newNumber);
 		console.log(guessNum);
 	});
